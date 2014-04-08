@@ -25,13 +25,21 @@ namespace Friendly_folder_icon_customization
         {
             InitializeComponent();
 
-        //// dleete below
+            DefaultPage defaultView = new DefaultPage();
+            ResourcePage resourceView = new ResourcePage();
+            GridDataManager gridManager = new GridDataManager();
+            StorageManager dataManager = new StorageManager();
+            GridDataFolderScanner dataScanner = new GridDataFolderScanner();
+
+            defaultView.DataContext = gridManager;
+            resourceView.DataContext = gridManager;
+
+            FrameView.Content = resourceView;
+
+            //// dleete below
             CurrentIcon.Source = new BitmapImage(new Uri("C:\\Users\\Alexia\\Pictures\\Icons\\Martz90-Circle-Timer.ico"));
 
-
-            DefaultPage defaultView = new DefaultPage();
-            ResourcePage resourceView = new ResourcePage(); 
-            FrameView.Content = resourceView;
+            gridManager.Items = dataScanner.Scan(dataManager.Library);
         }
     }
 }

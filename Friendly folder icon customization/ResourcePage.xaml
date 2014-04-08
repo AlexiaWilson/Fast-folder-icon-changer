@@ -8,17 +8,8 @@
 	Title="ResourcePage">
 
     <Grid HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="386">
-        <DataGrid HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" Height="257" Width="386" HeadersVisibility="None"/>
+        <DataGrid HorizontalAlignment="Left" Margin="0,27,0,0" VerticalAlignment="Top" Height="257" Width="386" HeadersVisibility="None" ItemsSource="{Binding Items}"/>
         <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="107" Margin="213,0,0,0"/>
-        <Button Content="..." HorizontalAlignment="Left" Margin="329,-1,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5">
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.254"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Button.RenderTransform>
-        </Button>
+        <Button Content="..." HorizontalAlignment="Left" Margin="329,-1,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </Page>
