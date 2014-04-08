@@ -34,7 +34,7 @@ namespace Friendly_folder_icon_customization
             defaultView.DataContext = gridManager;
             resourceView.DataContext = gridManager;
 
-            FrameView.Content = resourceView;
+            FrameView.Content = defaultView;
 
             //// dleete below
             CurrentIcon.Source = new BitmapImage(new Uri("C:\\Users\\Alexia\\Pictures\\Icons\\Martz90-Circle-Timer.ico"));

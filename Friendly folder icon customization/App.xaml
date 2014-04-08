@@ -3,6 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
+        <DataTemplate x:Key="IconTemplate">
+            <Image Source="{Binding Bitmap}" Height="64" Width="64" Margin="0, 0, 5, 5"/>
+        </DataTemplate>
+
     </Application.Resources>
 </Application>

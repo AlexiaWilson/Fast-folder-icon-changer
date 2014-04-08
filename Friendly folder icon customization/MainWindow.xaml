@@ -1,11 +1,9 @@
 ﻿<Window x:Class="Friendly_folder_icon_customization.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize">
     <Grid HorizontalAlignment="Left" Height="304" Margin="10,10,0,0" VerticalAlignment="Top" Width="501">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
+
         <ListBox HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="100" Margin="0,105,0,0">
             <ListBoxItem Content="Icon Library"/>
             <ListBoxItem Content="Icon Storage"/>

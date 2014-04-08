@@ -6,9 +6,11 @@
       mc:Ignorable="d" 
       d:DesignHeight="284" d:DesignWidth="386"
 	Title="DefaultPage">
-
-    <Grid HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="386">
-        <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="284" Width="386" HeadersVisibility="None" ItemsSource="{Binding Items}"/>
-    </Grid>
-
+    <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemTemplate="{StaticResource IconTemplate}" ItemsSource="{Binding Path=Items}" SelectionMode="Single">
+        <ListView.ItemsPanel>
+            <ItemsPanelTemplate>
+                <WrapPanel IsItemsHost="True" Width="386"/>
+            </ItemsPanelTemplate>
+        </ListView.ItemsPanel>
+    </ListView>
 </Page>
