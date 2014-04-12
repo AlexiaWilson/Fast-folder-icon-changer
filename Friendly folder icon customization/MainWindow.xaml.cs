@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
+using System.Resources;
+using System.Diagnostics;
 
 namespace Friendly_folder_icon_customization
 {
@@ -22,6 +24,7 @@ namespace Friendly_folder_icon_customization
     public partial class MainWindow : Window
     {
         public delegate void SelectionChanged(object sender, SelectionChangedEventArgs args);
+        public string ActiveDirectory { get; private set; }
 
         private Page current_view;
         private Icon active_icon;
@@ -40,6 +43,16 @@ namespace Friendly_folder_icon_customization
             dataScanner = new GridDataFolderScanner();
             DefaultPage defaultView = new DefaultPage();
             ResourcePage resourceView = new ResourcePage();
+
+            try 
+            {
+                ActiveDirectory = Environment.GetCommandLineArgs()[1];
+            } 
+            catch (IndexOutOfRangeException e) 
+            {
+                MessageBox.Show("Please run this program from the right click context menu");
+                Environment.Exit(0);
+            }
 
 
 
@@ -88,7 +101,7 @@ namespace Friendly_folder_icon_customization
 
         private void Save_click(object sender, RoutedEventArgs e)
         {
-            dataManager.Save(active_icon);
+            dataManager.Save(active_icon, ActiveDirectory);
         }
     }
 }

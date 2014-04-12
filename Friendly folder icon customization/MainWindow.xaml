@@ -15,6 +15,6 @@
         <Button Content="Save" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75" Click="Save_click"/>
         <Button Content="Close" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_click"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="267,216,0,-12" VerticalAlignment="Top" Width="100"/>
-        <Frame x:Name="FrameView" HorizontalAlignment="Left" Height="284" Margin="105,10,0,0" VerticalAlignment="Top" Width="386"/>
+        <Frame x:Name="FrameView" Height="254" Margin="0,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="386"/>
     </Grid>
 </Window>

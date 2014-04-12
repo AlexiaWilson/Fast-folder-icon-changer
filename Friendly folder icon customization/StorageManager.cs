@@ -20,16 +20,17 @@ namespace Friendly_folder_icon_customization
             Library.Add("C:\\Users\\Alexia\\Pictures\\Icons");
         }
 
-        public void Save(Icon icon)
+        public void Save(Icon icon, string directory)
         {
-            string output = "[.ShellClassInfo]";
-            output += String.Format( Environment.NewLine + "\nIconResource={0},{1}", icon.FileLocation, icon.Index);
-
-            FileStream stream = File.Open("desktop.ini", FileMode.Truncate, FileAccess.Write);
-            using( StreamWriter writer = new StreamWriter(stream) )
-            {
-                writer.Write(output);
-            }
+            /* 
+             * if file is in appdata storage:
+             *  seticon
+             * otherwise:
+             *  copy icon to appdata storage
+             *  seticon
+             *  
+             */
+            IconImport.SetIcon(directory, icon);
         }
     }
 }

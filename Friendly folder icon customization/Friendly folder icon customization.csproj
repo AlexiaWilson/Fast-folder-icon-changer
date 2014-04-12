@@ -83,6 +83,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="GridDataManager.cs" />
+    <Compile Include="IconImport.cs" />
     <Compile Include="ObservableCollectionExtension.cs" />
     <Compile Include="ResourcePage.xaml.cs">
       <DependentUpon>ResourcePage.xaml</DependentUpon>
