@@ -20,9 +20,22 @@ namespace Friendly_folder_icon_customization
     /// </summary>
     public partial class ResourcePage : Page
     {
+        /*public static readonly RoutedEvent IconSelectionEvent = EventManager.RegisterRoutedEvent("IconSelected", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ResourcePage));
+        public event RoutedEventHandler IconChanged
+        {
+            add { AddHandler(IconSelectionEvent, value); }
+            remove { RemoveHandler(IconSelectionEvent, value); }
+        }*/
+
         public ResourcePage()
         {
             InitializeComponent();
         }
+
+       /* private void IconList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var newEventArgs = new RoutedEventArgs(IconSelectionEvent, e);
+            RaiseEvent(newEventArgs);
+        }*/
     }
 }

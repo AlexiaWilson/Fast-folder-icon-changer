@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Drawing;
+using System.Windows.Controls.Primitives;
 
 namespace Friendly_folder_icon_customization
 {
@@ -21,25 +21,74 @@ namespace Friendly_folder_icon_customization
     /// </summary>
     public partial class MainWindow : Window
     {
+        public delegate void SelectionChanged(object sender, SelectionChangedEventArgs args);
+
+        private Page current_view;
+        private Icon active_icon;
+
+        // Operation controllers
+        private GridDataManager gridManager;
+        private StorageManager dataManager;
+        private GridDataFolderScanner dataScanner;
+
         public MainWindow()
         {
             InitializeComponent();
-
+            SelectionChanged selectionHandle = IconList_SelectionChanged;
+            gridManager = new GridDataManager();
+            dataManager = new StorageManager();
+            dataScanner = new GridDataFolderScanner();
             DefaultPage defaultView = new DefaultPage();
             ResourcePage resourceView = new ResourcePage();
-            GridDataManager gridManager = new GridDataManager();
-            StorageManager dataManager = new StorageManager();
-            GridDataFolderScanner dataScanner = new GridDataFolderScanner();
+
+
 
             defaultView.DataContext = gridManager;
-            resourceView.DataContext = gridManager;
+            defaultView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(selectionHandle));
 
-            FrameView.Content = defaultView;
+            resourceView.DataContext = gridManager;
+            resourceView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(selectionHandle));
+
+
+            current_view = defaultView;
+            FrameView.Content = current_view;
 
             //// dleete below
-            CurrentIcon.Source = new BitmapImage(new Uri("C:\\Users\\Alexia\\Pictures\\Icons\\Martz90-Circle-Timer.ico"));
+            var blah = new Icon("C:\\users\\alexia\\pictures\\icons\\martz90-circle-timer.ico");
+            SetViewIcon(blah);
+
 
             gridManager.Items = dataScanner.Scan(dataManager.Library);
+
+
+        }
+
+        private void SetViewIcon(Icon icon)
+        {
+            active_icon = icon;
+            CurrentIcon.Source = icon.Bitmap;
+        }
+
+        private void SetViewIcon()
+        {
+            // Read icon in desktop.ini and use it, or use default 'unknown' icon
+        }
+
+        private void IconList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Icon Item = (Icon) e.AddedItems[0];
+            SetViewIcon(Item);
+
+        }
+
+        private void Cancel_click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void Save_click(object sender, RoutedEventArgs e)
+        {
+            dataManager.Save(active_icon);
         }
     }
 }

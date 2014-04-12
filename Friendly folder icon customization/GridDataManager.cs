@@ -10,21 +10,25 @@ using System.Windows.Media.Imaging;
 
 namespace Friendly_folder_icon_customization 
 {
-    class Icon
+    public class Icon
     {
-        public string FileLocation { get; set; }
-        public BitmapImage Bitmap { get; set; }
-        
-        public Icon() { }
+        public string FileLocation { get; private set; }
+        public BitmapImage Bitmap { get; private set; }
+        public int Index {get; private set; }
+
         public Icon(string FileLocation)
         {
             this.FileLocation = FileLocation;
+            Bitmap = new BitmapImage(new Uri(FileLocation));
+            Index = 0;
         }
-        public Icon(string FileLocation, BitmapImage Bitmap)
+
+        // TODO: Constructor for DLL Resource icons
+        public Icon()
         {
-            this.FileLocation = FileLocation;
-            this.Bitmap = Bitmap;
+
         }
+
     }
 
     class GridDataManager 
@@ -63,9 +67,7 @@ namespace Friendly_folder_icon_customization
 
             foreach (var File in Files)
             {
-                var Image = new BitmapImage(new Uri(File));
-
-                ParsedImages.Add(new Icon(File, Image));
+                ParsedImages.Add(new Icon(File));
             }
 
             return ParsedImages;
@@ -83,9 +85,7 @@ namespace Friendly_folder_icon_customization
 
             foreach(var ImageFile in FoundImages)
             {
-                var Image = new BitmapImage(new Uri(ImageFile));
-
-                ParsedImages.Add(new Icon(ImageFile, Image));
+                ParsedImages.Add(new Icon(ImageFile));
             }
 
             return ParsedImages;
@@ -108,4 +108,22 @@ namespace Friendly_folder_icon_customization
             return Files;
         }
     }
+
+    class FileManager
+    {
+        public FileManager() { }
+
+        public void Save(Icon icon)
+        {
+            string current_folder = Environment.CurrentDirectory;
+            string template = String.Format("[.ShellClassInfo]\nIconResource={0},{1}", icon.FileLocation, icon.Index);
+
+            using(var fp = new StreamWriter(String.Format(@"{0}\desktop.ini", current_folder)))
+            {
+                fp.Write(template);
+            }
+        }
+    }
+
 }
+

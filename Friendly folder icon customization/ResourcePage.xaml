@@ -8,10 +8,10 @@
 	Title="ResourcePage">
 
     <Grid HorizontalAlignment="Left" Height="284" VerticalAlignment="Top" Width="386">
-        <ListView ItemTemplate="{StaticResource IconTemplate}" ItemsSource="{Binding Path=Items}" Margin="0,27,0,0">
+        <ListView x:Name="IconList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemTemplate="{StaticResource IconTemplate}" ItemsSource="{Binding Path=Items}" Margin="0,27,0,0">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel IsItemsHost="True"/>
+                    <WrapPanel IsItemsHost="True" Width="386"/>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
         </ListView>
