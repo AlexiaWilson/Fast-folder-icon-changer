@@ -22,30 +22,7 @@ namespace Friendly_folder_icon_customization
 
         public void Save(Icon icon)
         {
-            string output = "";
-            /*FileStream stream = File.Open("desktop.ini", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-            using ( StreamReader reader = new StreamReader(stream) )
-            {
-                string current_line;
-                while ( (current_line = reader.ReadLine()) != null )
-                {
-                    if (current_line.Contains("IconResource") || current_line.Contains("IconFile") || current_line.Contains("IconIndex"))
-                    {
-                        continue;
-                    }
-                    output += current_line;
-                }
-            }
-
-            bool ContainsShellHeader = output.Contains("[.ShellClassInfo]");
-
-            if ( !ContainsShellHeader )
-            {*/
-                output += "[.ShellClassInfo]";
-            //}
-
-
+            string output = "[.ShellClassInfo]";
             output += String.Format( Environment.NewLine + "\nIconResource={0},{1}", icon.FileLocation, icon.Index);
 
             FileStream stream = File.Open("desktop.ini", FileMode.Truncate, FileAccess.Write);
