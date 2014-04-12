@@ -7,10 +7,10 @@ using System.Runtime.InteropServices;
 
 namespace Friendly_folder_icon_customization
 {
-    static class IconImport
+    static class ShellAPI
     {
         [DllImport("shell32.dll", CharSet=CharSet.Auto, SetLastError=true)]
-        private static extern UInt32 SHGetSetFolderCustomSettings(ref SHFOLDERCUSTOMSETTINGS pcfs, string path, UInt32 dwReadWrite);
+        private static extern UInt32 SHGetSetFolderCustomSettings([In, Out] ref SHFOLDERCUSTOMSETTINGS pcfs, string path, UInt32 dwReadWrite);
         
         [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
         public struct SHFOLDERCUSTOMSETTINGS
@@ -35,16 +35,15 @@ namespace Friendly_folder_icon_customization
 
         public static void SetIcon(string folder, Icon icon)
         {
-            UInt32 FCS_READ = 0x00000001;
             UInt32 FCS_FORCEWRITE = 0x00000002;
+            UInt32 FCSM_ICONFILE = 0x00000010;
             var pcfs = new SHFOLDERCUSTOMSETTINGS();
 
             pcfs.dwSize = (UInt32) Marshal.SizeOf(pcfs);
-            pcfs.dwMask = 0x00000010;
+            pcfs.dwMask = FCSM_ICONFILE;
             pcfs.pszIconFile = icon.FileLocation;
             pcfs.iIconIndex = 0;
 
             SHGetSetFolderCustomSettings(ref pcfs, folder, FCS_FORCEWRITE);
         }
-    }
 }

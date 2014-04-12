@@ -30,7 +30,7 @@ namespace Friendly_folder_icon_customization
              *  seticon
              *  
              */
-            IconImport.SetIcon(directory, icon);
+            ShellAPI.SetIcon(directory, icon);
         }
     }
 }
