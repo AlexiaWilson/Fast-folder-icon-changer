@@ -108,22 +108,5 @@ namespace Friendly_folder_icon_customization
             return Files;
         }
     }
-
-    class FileManager
-    {
-        public FileManager() { }
-
-        public void Save(Icon icon)
-        {
-            string current_folder = Environment.CurrentDirectory;
-            string template = String.Format("[.ShellClassInfo]\nIconResource={0},{1}", icon.FileLocation, icon.Index);
-
-            using(var fp = new StreamWriter(String.Format(@"{0}\desktop.ini", current_folder)))
-            {
-                fp.Write(template);
-            }
-        }
-    }
-
 }
 
