@@ -98,6 +98,7 @@ namespace Friendly_folder_icon_customization
         private void Save_click(object sender, RoutedEventArgs e)
         {
             dataManager.Save(active_icon, ActiveDirectory);
+            Environment.Exit(0);
         }
 
         private void Clear_click(object sender, RoutedEventArgs e)
@@ -110,6 +111,7 @@ namespace Friendly_folder_icon_customization
             dataManager.Save(icon, ActiveDirectory);
 
             SetViewIcon(icon);
+            Environment.Exit(0);
         }
     }
 }
