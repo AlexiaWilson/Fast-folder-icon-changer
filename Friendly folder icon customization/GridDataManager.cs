@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Security.Cryptography;
 
 namespace Friendly_folder_icon_customization 
 {
@@ -23,12 +24,27 @@ namespace Friendly_folder_icon_customization
             Index = 0;
         }
 
-        // TODO: Constructor for DLL Resource icons
         public Icon()
         {
 
         }
 
+        public new string GetHashCode() {
+            using(var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(FileLocation))
+                {
+                    return BitConverter.ToString(md5.ComputeHash(stream)).Replace("-", "").ToLower();
+                }
+            }
+        }
+    }
+
+    public class LibraryIcon : Icon {
+        public LibraryIcon(string FileLocation) : base(FileLocation) { }
+    }
+    public class StorageIcon : Icon {
+        public StorageIcon(string FileLocation) : base(FileLocation) { }
     }
 
     class GridDataManager 
@@ -44,55 +60,62 @@ namespace Friendly_folder_icon_customization
                 _Items.Replace(value);
             }
         }
+        private ObservableCollection<Icon> _Items = new ObservableCollection<Icon>();
 
-        private ObservableCollection<Icon> _Items;
+        private string library = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+        private string storage = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\QuickFolderIconizer";
 
-        public GridDataManager()
+        public void Scan()
         {
-            _Items = new ObservableCollection<Icon>();
-        }
-    }
+            var Icons = new ObservableCollection<Icon>();
+            var FoundIcons = new List<string>();
 
-    class GridDataFolderScanner
-    {
-        public GridDataFolderScanner()
-        {
-
-        }
-
-        public ObservableCollection<Icon> Scan(string Folder)
-        {
-            var Files = ScanFolder(Folder);
-            var ParsedImages = new ObservableCollection<Icon>();
-
-            foreach (var File in Files)
+            // Add all icons in our storage folder to our observer
+            foreach (var iconFile in FindIcons(storage))
             {
-                ParsedImages.Add(new Icon(File));
+                var icon = new StorageIcon(iconFile);
+                Icons.Add(icon);
             }
 
-            return ParsedImages;
+            // Add all icons found in our recursive directory search to a list
+            foreach (var folder in FindDirectories(library))
+            {
+                FoundIcons.AddRange(FindIcons(folder));
+            }
+
+            // Process that list into Icon classes and add to our observer
+            foreach (var iconFile in FoundIcons)
+            {
+                var comparer = new IconComparer();
+                var icon = new LibraryIcon(iconFile);
+
+                // We prefer to display our stored icons over the ones inside our library
+                if (Icons.Contains(icon, comparer))
+                {
+                    continue;
+                }
+                Icons.Add(icon);
+            }
+
+            Items = Icons;
         }
 
-        public ObservableCollection<Icon> Scan(List<string> Folders )
+        // Recursively scans a folder for folders inside of it. Used to pass as an argument to Scan() 
+        private List<string> FindDirectories(string folderuri)
         {
-            var FoundImages = new List<string>();
-            var ParsedImages = new ObservableCollection<Icon>();
+            var Folders = new List<string>();
+            Folders.Add(folderuri);
 
-            foreach (var Folder in Folders)
+            foreach (var folder in Directory.GetDirectories(folderuri))
             {
-                FoundImages.AddRange(ScanFolder(Folder));
+                Folders.AddRange(FindDirectories(folder));
             }
 
-            foreach(var ImageFile in FoundImages)
-            {
-                ParsedImages.Add(new Icon(ImageFile));
-            }
-
-            return ParsedImages;
+            return Folders;
         }
 
         // Returns the file names matching a pattern in a folder
-        private List<string> ScanFolder(string folder)
+        private List<string> FindIcons(string folder)
         {
             var Files = new List<string>();
             foreach (string file in Directory.GetFiles(folder))
@@ -106,6 +129,19 @@ namespace Friendly_folder_icon_customization
             }
 
             return Files;
+        }
+    }
+
+    class IconComparer : IEqualityComparer<Icon>
+    {
+        public bool Equals(Icon icon1, Icon icon2)
+        {
+            return icon1.GetHashCode() == icon2.GetHashCode();
+        }
+
+        public int GetHashCode(Icon icon)
+        {
+            return icon.FileLocation.GetHashCode();
         }
     }
 }

@@ -32,7 +32,6 @@ namespace Friendly_folder_icon_customization
         // Operation controllers
         private GridDataManager gridManager;
         private StorageManager dataManager;
-        private GridDataFolderScanner dataScanner;
 
         public MainWindow()
         {
@@ -40,7 +39,6 @@ namespace Friendly_folder_icon_customization
             SelectionChanged selectionHandle = IconList_SelectionChanged;
             gridManager = new GridDataManager();
             dataManager = new StorageManager();
-            dataScanner = new GridDataFolderScanner();
             DefaultPage defaultView = new DefaultPage();
             ResourcePage resourceView = new ResourcePage();
 
@@ -71,10 +69,7 @@ namespace Friendly_folder_icon_customization
             var blah = new Icon("C:\\users\\alexia\\pictures\\icons\\martz90-circle-timer.ico");
             SetViewIcon(blah);
 
-
-            gridManager.Items = dataScanner.Scan(dataManager.Library);
-
-
+            gridManager.Scan();
         }
 
         private void SetViewIcon(Icon icon)
@@ -114,8 +109,7 @@ namespace Friendly_folder_icon_customization
 
             dataManager.Save(icon, ActiveDirectory);
 
-            active_icon = icon;
-            CurrentIcon.Source = icon.Bitmap;
+            SetViewIcon(icon);
         }
     }
 }
