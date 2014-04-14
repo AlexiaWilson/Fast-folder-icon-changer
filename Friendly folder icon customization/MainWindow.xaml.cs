@@ -21,6 +21,7 @@ namespace Friendly_folder_icon_customization
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+
     public partial class MainWindow : Window
     {
         public delegate void SelectionChanged(object sender, SelectionChangedEventArgs args);
@@ -42,7 +43,7 @@ namespace Friendly_folder_icon_customization
             DefaultPage defaultView = new DefaultPage();
             ResourcePage resourceView = new ResourcePage();
 
-          /*  try 
+            try 
             {
                 ActiveDirectory = Environment.GetCommandLineArgs()[1];
             } 
@@ -50,10 +51,7 @@ namespace Friendly_folder_icon_customization
             {
                 MessageBox.Show("Please run this program from the right click context menu");
                 Environment.Exit(0);
-            }*/
-            ActiveDirectory = @"C:\Users\Alexia\Desktop\Completed Projects\Project Careerguide15 Python";
-
-
+            }
 
             defaultView.DataContext = gridManager;
             defaultView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(selectionHandle));
@@ -65,11 +63,13 @@ namespace Friendly_folder_icon_customization
             current_view = defaultView;
             FrameView.Content = current_view;
 
-            //// dleete below
-            var blah = new Icon("C:\\users\\alexia\\pictures\\icons\\martz90-circle-timer.ico");
-            SetViewIcon(blah);
-
+            // Scan our library + storage
             gridManager.Scan();
+
+            string iconlocation = ShellAPI.GetIcon(ActiveDirectory);
+            Icon icon = iconlocation != "" ? new Icon(iconlocation) : new Icon();
+
+            SetViewIcon(icon);
         }
 
         private void SetViewIcon(Icon icon)
