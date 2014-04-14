@@ -44,7 +44,7 @@ namespace Friendly_folder_icon_customization
             DefaultPage defaultView = new DefaultPage();
             ResourcePage resourceView = new ResourcePage();
 
-            try 
+          /*  try 
             {
                 ActiveDirectory = Environment.GetCommandLineArgs()[1];
             } 
@@ -52,7 +52,8 @@ namespace Friendly_folder_icon_customization
             {
                 MessageBox.Show("Please run this program from the right click context menu");
                 Environment.Exit(0);
-            }
+            }*/
+            ActiveDirectory = @"C:\Users\Alexia\Desktop\Completed Projects\Project Careerguide15 Python";
 
 
 
@@ -102,6 +103,19 @@ namespace Friendly_folder_icon_customization
         private void Save_click(object sender, RoutedEventArgs e)
         {
             dataManager.Save(active_icon, ActiveDirectory);
+        }
+
+        private void Clear_click(object sender, RoutedEventArgs e)
+        {
+            var icon = new Icon();
+            icon.FileLocation = "";
+            icon.Bitmap = new System.Windows.Media.Imaging.BitmapImage();
+            icon.Index = 0;
+
+            dataManager.Save(icon, ActiveDirectory);
+
+            active_icon = icon;
+            CurrentIcon.Source = icon.Bitmap;
         }
     }
 }

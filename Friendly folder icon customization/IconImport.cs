@@ -9,10 +9,10 @@ namespace Friendly_folder_icon_customization
 {
     static class ShellAPI
     {
-        [DllImport("shell32.dll", CharSet=CharSet.Auto, SetLastError=true)]
+        [DllImport("shell32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern UInt32 SHGetSetFolderCustomSettings([In, Out] ref SHFOLDERCUSTOMSETTINGS pcfs, string path, UInt32 dwReadWrite);
-        
-        [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public struct SHFOLDERCUSTOMSETTINGS
         {
 
@@ -39,11 +39,12 @@ namespace Friendly_folder_icon_customization
             UInt32 FCSM_ICONFILE = 0x00000010;
             var pcfs = new SHFOLDERCUSTOMSETTINGS();
 
-            pcfs.dwSize = (UInt32) Marshal.SizeOf(pcfs);
+            pcfs.dwSize = (UInt32)Marshal.SizeOf(pcfs);
             pcfs.dwMask = FCSM_ICONFILE;
             pcfs.pszIconFile = icon.FileLocation;
             pcfs.iIconIndex = 0;
 
             SHGetSetFolderCustomSettings(ref pcfs, folder, FCS_FORCEWRITE);
         }
+    }
 }

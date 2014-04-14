@@ -12,9 +12,9 @@ namespace Friendly_folder_icon_customization
 {
     public class Icon
     {
-        public string FileLocation { get; private set; }
-        public BitmapImage Bitmap { get; private set; }
-        public int Index {get; private set; }
+        public string FileLocation { get; set; }
+        public BitmapImage Bitmap { get; set; }
+        public int Index {get; set; }
 
         public Icon(string FileLocation)
         {

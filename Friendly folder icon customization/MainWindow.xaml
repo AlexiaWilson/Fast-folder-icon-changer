@@ -6,7 +6,7 @@
         >
     <Grid HorizontalAlignment="Left" Height="304" Margin="10,10,0,0" VerticalAlignment="Top" Width="501">
 
-        <ListBox HorizontalAlignment="Left" Height="136" VerticalAlignment="Top" Width="100" Margin="0,105,0,0">
+        <ListBox HorizontalAlignment="Left" Height="93" VerticalAlignment="Top" Width="100" Margin="0,105,0,0" IsEnabled="False">
             <ListBoxItem Content="Icon Library"/>
             <ListBoxItem Content="Icon Storage"/>
             <ListBoxItem Content="DLL Resource"/>
@@ -16,5 +16,6 @@
         <Button Content="Close" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_click"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="267,216,0,-12" VerticalAlignment="Top" Width="100"/>
         <Frame x:Name="FrameView" Height="254" Margin="0,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="386"/>
+        <Button Content="Clear Icon" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top" Width="75" Click="Clear_click"/>
     </Grid>
 </Window>
