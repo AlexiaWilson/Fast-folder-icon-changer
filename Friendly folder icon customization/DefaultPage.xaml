@@ -6,7 +6,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="284" d:DesignWidth="386"
 	Title="DefaultPage">
-    <ListView x:Name="IconList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemTemplate="{StaticResource IconTemplate}" ItemsSource="{Binding Path=Items}" SelectionMode="Single">
+    <ListView x:Name="IconList" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ItemTemplate="{StaticResource IconTemplate}" ItemsSource="{Binding FoundIcons}" SelectionMode="Single">
         <ListView.ItemsPanel>
             <ItemsPanelTemplate>
                 <WrapPanel IsItemsHost="True" Width="386"/>

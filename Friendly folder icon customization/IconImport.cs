@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
 namespace Friendly_folder_icon_customization
@@ -61,22 +56,7 @@ namespace Friendly_folder_icon_customization
             public UInt32 cchLogo;
         };
 
-        [DllImport("shell32.dll", CharSet = CharSet.Auto)]
-        private static extern IntPtr SHGetFileInfo(string pszPath, int dwFileAttributes, out SHFILEINFO psfi, int cbFileInfo, int uFlags);
-
-        [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Auto)]
-        public struct SHFILEINFO
-        {
-            IntPtr hIcon;
-            int iIcon;
-            uint dwAttributes;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=260)] // MAX_PATH = 260
-            string szDisplayName;
-            [MarshalAs(UnmanagedType.ByValTStr, SizeConst=80)]
-            string szTypeName;
-        }
-
-        public static void SetIcon(string folder, Icon icon)
+        public static void SetIcon(string folder, string iconPath)
         {
             UInt32 FCS_FORCEWRITE = 0x00000002;
             UInt32 FCSM_ICONFILE = 0x00000010;
@@ -84,7 +64,7 @@ namespace Friendly_folder_icon_customization
 
             pcfs.dwSize = (UInt32)Marshal.SizeOf(pcfs);
             pcfs.dwMask = FCSM_ICONFILE;
-            pcfs.pszIconFile = icon.FileLocation;
+            pcfs.pszIconFile = iconPath;
             pcfs.iIconIndex = 0;
             pcfs.cchIconFile = 0;
 

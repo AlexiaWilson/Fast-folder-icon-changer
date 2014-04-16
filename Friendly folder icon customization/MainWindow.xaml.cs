@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
-using System.Resources;
-using System.Diagnostics;
 
 namespace Friendly_folder_icon_customization
 {
@@ -24,94 +10,33 @@ namespace Friendly_folder_icon_customization
 
     public partial class MainWindow : Window
     {
-        public delegate void SelectionChanged(object sender, SelectionChangedEventArgs args);
-        public string ActiveDirectory { get; private set; }
+        private DefaultPage _libraryView = new DefaultPage();
+        private ResourcePage _resourceView = new ResourcePage();
+        private Page _viewInUse;
 
-        private Page current_view;
-        private Icon active_icon;
-
-        // Operation controllers
-        private GridDataManager gridManager;
-        private StorageManager dataManager;
-
+        private DatabinderExecutive dataExecutive;
+        private UserCallDispatcher userEventHandlers;
         public MainWindow()
         {
             InitializeComponent();
-            SelectionChanged selectionHandle = IconList_SelectionChanged;
-            gridManager = new GridDataManager();
-            dataManager = new StorageManager();
-            DefaultPage defaultView = new DefaultPage();
-            ResourcePage resourceView = new ResourcePage();
+            dataExecutive = new DatabinderExecutive(this);
+            userEventHandlers = new UserCallDispatcher(dataExecutive);
 
-            try 
-            {
-                ActiveDirectory = Environment.GetCommandLineArgs()[1];
-            } 
-            catch (IndexOutOfRangeException e) 
-            {
-                MessageBox.Show("Please run this program from the right click context menu");
-                Environment.Exit(0);
-            }
+            _libraryView.DataContext = dataExecutive;
+            _resourceView.DataContext = dataExecutive;
+            CurrentIcon.DataContext = dataExecutive;
 
-            defaultView.DataContext = gridManager;
-            defaultView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(selectionHandle));
+            _viewInUse = _libraryView;
+            FrameView.Content = _viewInUse;
 
-            resourceView.DataContext = gridManager;
-            resourceView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(selectionHandle));
+            _libraryView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(userEventHandlers.SelectionHandler));
+            _resourceView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(userEventHandlers.SelectionHandler));
 
+            ClearButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ClearHandler));
+            SaveButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.SaveHandler));
+            CloseButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ExitHandler));
 
-            current_view = defaultView;
-            FrameView.Content = current_view;
-
-            // Scan our library + storage
-            gridManager.Scan();
-
-            string iconlocation = ShellAPI.GetIcon(ActiveDirectory);
-            Icon icon = iconlocation != "" ? new Icon(iconlocation) : new Icon();
-
-            SetViewIcon(icon);
-        }
-
-        private void SetViewIcon(Icon icon)
-        {
-            active_icon = icon;
-            CurrentIcon.Source = icon.Bitmap;
-        }
-
-        private void SetViewIcon()
-        {
-            // Read icon in desktop.ini and use it, or use default 'unknown' icon
-        }
-
-        private void IconList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Icon Item = (Icon) e.AddedItems[0];
-            SetViewIcon(Item);
-
-        }
-
-        private void Cancel_click(object sender, RoutedEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-
-        private void Save_click(object sender, RoutedEventArgs e)
-        {
-            dataManager.Save(active_icon, ActiveDirectory);
-            Environment.Exit(0);
-        }
-
-        private void Clear_click(object sender, RoutedEventArgs e)
-        {
-            var icon = new Icon();
-            icon.FileLocation = "";
-            icon.Bitmap = new System.Windows.Media.Imaging.BitmapImage();
-            icon.Index = 0;
-
-            dataManager.Save(icon, ActiveDirectory);
-
-            SetViewIcon(icon);
-            Environment.Exit(0);
+            dataExecutive.Start();
         }
     }
 }

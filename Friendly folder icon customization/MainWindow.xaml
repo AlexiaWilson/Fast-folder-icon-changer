@@ -11,11 +11,11 @@
             <ListBoxItem Content="Icon Storage"/>
             <ListBoxItem Content="DLL Resource"/>
         </ListBox>
-        <Image x:Name="CurrentIcon" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75" Click="Save_click"/>
-        <Button Content="Close" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="75" Click="Cancel_click"/>
+        <Image x:Name="CurrentIcon" Source="{Binding Path=DisplayedIcon.Bitmap}"  HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="SaveButton" Content="Save" HorizontalAlignment="Left" Margin="10,246,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="CloseButton" Content="Close" HorizontalAlignment="Left" Margin="10,273,0,0" VerticalAlignment="Top" Width="75"/>
         <Grid HorizontalAlignment="Left" Height="100" Margin="267,216,0,-12" VerticalAlignment="Top" Width="100"/>
-        <Frame x:Name="FrameView" Height="254" Margin="0,40,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="386"/>
-        <Button Content="Clear Icon" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top" Width="75" Click="Clear_click"/>
+        <Frame x:Name="FrameView" Height="284" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="386"/>
+        <Button x:Name="ClearButton" Content="Clear Icon" HorizontalAlignment="Left" Margin="10,219,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Window>

@@ -82,13 +82,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="GridDataManager.cs" />
+    <Compile Include="DatabinderExecutive.cs" />
+    <Compile Include="FileDept.cs" />
     <Compile Include="IconImport.cs" />
-    <Compile Include="ObservableCollectionExtension.cs" />
+    <Compile Include="IconManager.cs" />
+    <Compile Include="ReferenceCounter.cs" />
     <Compile Include="ResourcePage.xaml.cs">
       <DependentUpon>ResourcePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="StorageManager.cs" />
+    <Compile Include="UserCallDispatcher.cs" />
     <Page Include="DefaultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
