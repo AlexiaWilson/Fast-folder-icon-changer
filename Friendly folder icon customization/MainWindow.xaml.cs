@@ -32,6 +32,9 @@ namespace Friendly_folder_icon_customization
             _libraryView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(userEventHandlers.SelectionHandler));
             _resourceView.IconList.AddHandler(Selector.SelectionChangedEvent, new SelectionChangedEventHandler(userEventHandlers.SelectionHandler));
 
+            _libraryView.IconList.AddHandler(Button.MouseDoubleClickEvent, new RoutedEventHandler(userEventHandlers.SaveHandler));
+            _resourceView.IconList.AddHandler(Button.MouseDoubleClickEvent, new RoutedEventHandler(userEventHandlers.SaveHandler));
+
             ClearButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ClearHandler));
             SaveButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.SaveHandler));
             CloseButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ExitHandler));
