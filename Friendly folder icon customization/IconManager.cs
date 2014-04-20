@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Windows;
 using System.Windows.Media.Imaging;
 
 namespace Friendly_folder_icon_customization
@@ -45,6 +46,11 @@ namespace Friendly_folder_icon_customization
 
             // Protect against a crash if the icon has been deleted and the desktop.ini wasn't updated
             icon = File.Exists(icon) ? icon : null;
+
+            // Protect against trying to file load a DLL resource
+            // [SIC-16]
+            icon = icon.EndsWith(".dll") ? null : icon;
+
             return FormatIcon(icon);
         }
 

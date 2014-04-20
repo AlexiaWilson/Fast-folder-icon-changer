@@ -24,14 +24,21 @@ namespace Friendly_folder_icon_customization
         // Reads a file and loads it into the dictionary class
         private void LoadData()
         {
-            var fileData = String.Join("", File.ReadAllLines(_referenceDataFile));
-
-            foreach (var entry in Regex.Matches(fileData, @"(\w|\d)+:\d+"))
+            if (File.Exists(_referenceDataFile))
             {
-                var tokens = entry.ToString().Split(':');
-                var Key = tokens[0];
-                var Value = int.Parse(tokens[1]);
-                _references[Key] = Value;
+                var fileData = String.Join("", File.ReadAllLines(_referenceDataFile));
+
+                foreach (var entry in Regex.Matches(fileData, @"(\w|\d)+:\d+"))
+                {
+                    var tokens = entry.ToString().Split(':');
+                    var Key = tokens[0];
+                    var Value = int.Parse(tokens[1]);
+                    _references[Key] = Value;
+                }
+            }
+            else
+            {
+                File.Create(_referenceDataFile);
             }
         }
 
