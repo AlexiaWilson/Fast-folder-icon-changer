@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Media.Imaging;
 
 namespace Friendly_folder_icon_customization
@@ -38,7 +39,12 @@ namespace Friendly_folder_icon_customization
         {
             // If our folder has no icon associated with it, call FormatIcon with a null file path 
             var filePath = _fileDept.GetFolderIcon();
+
+            // Check for an empty/nonexistent file path
             var icon = (filePath.Length > 0) ? filePath : null;
+
+            // Protect against a crash if the icon has been deleted and the desktop.ini wasn't updated
+            icon = File.Exists(icon) ? icon : null;
             return FormatIcon(icon);
         }
 
