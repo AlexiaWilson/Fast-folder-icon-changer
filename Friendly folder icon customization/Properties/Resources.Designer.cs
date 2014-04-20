@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Friendly_folder_icon_customization.Properties
+namespace IconCustomizer.Properties
 {
 
 

@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

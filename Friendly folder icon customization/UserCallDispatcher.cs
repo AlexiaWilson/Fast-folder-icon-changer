@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     class UserCallDispatcher
     {

@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     class IconManager
     {
@@ -41,17 +41,18 @@ namespace Friendly_folder_icon_customization
             // If our folder has no icon associated with it, call FormatIcon with a null file path 
             var filePath = _fileDept.GetFolderIcon();
 
-            // Check for an empty/nonexistent file path
-            var icon = (filePath.Length > 0) ? filePath : null;
-
-            // Protect against a crash if the icon has been deleted and the desktop.ini wasn't updated
-            icon = File.Exists(icon) ? icon : null;
-
-            // Protect against trying to file load a DLL resource
+            // * Check for an empty/nonexistent file path
+            // * Protect against a crash if the icon has been deleted and the desktop.ini wasn't updated
+            // * Protect against trying to file load a DLL resource
             // [SIC-16]
-            icon = icon.EndsWith(".dll") ? null : icon;
-
-            return FormatIcon(icon);
+            if (filePath.Length == 0 || filePath.EndsWith(".dll") || !File.Exists(filePath))
+            {
+                return FormatIcon(null);
+            }
+            else
+            {
+                return FormatIcon(filePath);
+            }
         }
 
         // Sets (or clears) a folders icon

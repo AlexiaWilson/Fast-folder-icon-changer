@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System;
 using System.ComponentModel;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     class DatabinderExecutive : INotifyPropertyChanged
     {

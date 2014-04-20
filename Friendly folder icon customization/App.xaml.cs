@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     /// <summary>
     /// Interaction logic for App.xaml

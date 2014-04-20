@@ -1,4 +1,4 @@
-﻿<Page x:Class="Friendly_folder_icon_customization.ResourcePage"
+﻿<Page x:Class="IconCustomizer.ResourcePage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

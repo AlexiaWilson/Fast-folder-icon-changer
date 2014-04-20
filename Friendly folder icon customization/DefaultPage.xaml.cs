@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     /// <summary>
     /// Interaction logic for DefaultPage.xaml

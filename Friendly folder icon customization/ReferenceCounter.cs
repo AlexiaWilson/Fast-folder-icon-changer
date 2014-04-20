@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     class ReferenceCounter
     {
@@ -16,7 +16,7 @@ namespace Friendly_folder_icon_customization
         public ReferenceCounter(string appData)
         {
             _references = new Dictionary<string, int>();
-            _referenceDataFile = appData + "data.dat";
+            _referenceDataFile = appData + @"\data.dat";
 
             LoadData();
         }

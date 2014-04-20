@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Windows;
+using Microsoft.Win32;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     class FileDept
     {
@@ -20,7 +22,7 @@ namespace Friendly_folder_icon_customization
 
             /* These are the folders that we scan for our images */
             _libraryFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            _appData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + @"\QuickFolderIconizer\"; // We'll store our used images here
+            _appData = (string) Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\IconCustomizer", "AppData", ""); // We'll store our used images here
 
             _referenceCounter = new ReferenceCounter(_appData);
             _referenceCounter.ReferenceCountIsZero += ReferenceCountIsZero_handler;

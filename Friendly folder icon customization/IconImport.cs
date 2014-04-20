@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Friendly_folder_icon_customization
+namespace IconCustomizer
 {
     static class ShellAPI
     {
