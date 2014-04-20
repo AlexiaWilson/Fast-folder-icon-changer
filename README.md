@@ -1,4 +1,4 @@
-Fast-folder-icon-changer
+Fast folder icon changer
 ========================
 
 Quickly change a folders' icon in a few clicks.
