@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Friendly_folder_icon_customization
 {
@@ -38,6 +39,8 @@ namespace Friendly_folder_icon_customization
             ClearButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ClearHandler));
             SaveButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.SaveHandler));
             CloseButton.AddHandler(Button.ClickEvent, new RoutedEventHandler(userEventHandlers.ExitHandler));
+
+            MainWindowView.AddHandler(Keyboard.KeyDownEvent, new KeyEventHandler(userEventHandlers.KeyboardEvents));
 
             dataExecutive.Start();
         }

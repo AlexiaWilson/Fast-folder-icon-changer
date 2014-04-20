@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Friendly_folder_icon_customization
 {
@@ -42,6 +43,14 @@ namespace Friendly_folder_icon_customization
         public void ExitHandler(object sender, RoutedEventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        public void KeyboardEvents(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape )
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }
