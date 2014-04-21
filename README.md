@@ -1,4 +1,4 @@
- What is it?
+ _What is it?_
   -----------
 
   This application adds context menu options to change the icon
@@ -6,20 +6,20 @@
   for icons in the My Pictures directory.
   
 
-  Documentation
+  _Documentation_
   -------------
 
   When a folders' icon is set, the program copies the selected
   icon to an application data folder and points the desktop.ini 
   to that copied file.
 
-  Installation
+  _Installation_
   ------------
 
   The installer under releases is recommended. Installer sets up
   registry entries that aren't set by the software at the moment.
 
-  Licensing
+  _Licensing_
   ---------
 
   Licensed under WTFPL
