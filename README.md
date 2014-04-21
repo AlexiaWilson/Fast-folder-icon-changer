@@ -1,8 +1,8 @@
-Fast folder icon changer
+Fast-folder-icon-changer
 ========================
 
 Quickly change a folders' icon in a few clicks.
 
-Scans My Pictures library for .ico files
+Scans the My Pictures library for .ico files
 
-Adds right click context menu to folders
+Change a folders icon by right clicking a folder and selecting "Change folder icon"

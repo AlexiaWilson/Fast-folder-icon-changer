@@ -38,7 +38,7 @@ namespace IconCustomizer
             }
             else
             {
-                File.Create(_referenceDataFile);
+                File.Create(_referenceDataFile).Close();
             }
         }
 

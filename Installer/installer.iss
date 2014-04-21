@@ -46,7 +46,7 @@ Name: "{localappdata}\{#MyAppName}"
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Files]
-Source: "C:\Users\Alexia\Desktop\Project Shelve\Project Simple Icon Customization\Friendly folder icon customization\bin\Release\Friendly folder icon customization.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion
+Source: "C:\Users\Alexia\Desktop\Completed Projects\Project Simple Icon Customization\Friendly folder icon customization\bin\Release\Friendly folder icon customization.exe"; DestDir: "{app}"; DestName: "{#MyAppExeName}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Code]
