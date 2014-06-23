@@ -64,7 +64,7 @@ namespace IconCustomizer
             }
             else
             {
-                _fileDept.SetFolderIcon(icon.FilePath, icon.FileName);
+                _fileDept.SetFolderIcon(icon.FilePath);
             }
         }
     }

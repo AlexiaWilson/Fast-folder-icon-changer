@@ -86,7 +86,6 @@
     <Compile Include="FileDept.cs" />
     <Compile Include="IconImport.cs" />
     <Compile Include="IconManager.cs" />
-    <Compile Include="ReferenceCounter.cs" />
     <Compile Include="ResourcePage.xaml.cs">
       <DependentUpon>ResourcePage.xaml</DependentUpon>
     </Compile>
